@@ -19,10 +19,9 @@ from SConsTools.standardExternalPackage import standardExternalPackage
 # giving some or all parameters.
 #
 
-boost_ver = "1.49.0"
-if env['SIT_ARCH_OS'] in ('rhel6','rhel7') : boost_ver = "1.55.0"
+assert env.get('CONDA', False), "not conda build"
 
-PREFIX = pjoin('$SIT_EXTERNAL_SW', "boost", boost_ver + '-$PYTHON')
+PREFIX = env['SIT_EXTERNAL_SW']
 INCDIR = "include/boost"
 
 # Mother of all other boost packages, this will only link 
