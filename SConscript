@@ -11,24 +11,14 @@
 Import('*')
 
 from os.path import join as pjoin
+from SConsTools.CondaMeta import CondaMeta
 from SConsTools.standardExternalPackage import standardExternalPackage
 
-#
-# For the standard external packages which contain includes, libraries, 
-# and applications it is usually sufficient to call standardExternalPackage()
-# giving some or all parameters.
-#
-
-assert env.get('CONDA', False), "not conda build"
-
-PREFIX = env['SIT_EXTERNAL_SW']
-INCDIR = "include/boost"
-
-# Mother of all other boost packages, this will only link 
-# include directory into release
+condaBoost = CondaMeta('boost')
+PREFIX = condaBoost.prefix()
+INCDIR = 'include/boost'
 standardExternalPackage('boost', **locals())
 
-# INCDIR needed any more
 del INCDIR
 LIBDIR = "lib"
 
@@ -53,6 +43,7 @@ pkgs = {'boost_chrono' : 'boost_system boost',
         'boost_wave' : 'boost_date_time boost_thread boost_filesystem boost_system boost',
         'boost_wserialization' : 'boost_serialization boost',
         }
+
 for pkg, dep in pkgs.iteritems():
     DEPS = dep
     PKGLIBS = pkg
