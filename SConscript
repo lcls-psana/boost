@@ -6,7 +6,7 @@
 #  SConscript file for package nexus
 #------------------------------------------------------------------------
 
-# Do not delete following line, it must be present in 
+# Do not delete following line, it must be present in
 # SConscript file for any SIT project
 Import('*')
 
@@ -44,7 +44,7 @@ pkgs = {'boost_chrono' : 'boost_system boost',
         'boost_wserialization' : 'boost_serialization boost',
         }
 
-for pkg, dep in pkgs.iteritems():
+for pkg, dep in pkgs.items():
     DEPS = dep
     PKGLIBS = pkg
     LINKLIBS = 'lib' + PKGLIBS + '*.so*'
