@@ -13,6 +13,7 @@ Import('*')
 from os.path import join as pjoin
 from SConsTools.CondaMeta import CondaMeta
 from SConsTools.standardExternalPackage import standardExternalPackage
+import sys
 
 condaBoost = CondaMeta('boost')
 PREFIX = condaBoost.prefix()
@@ -31,7 +32,7 @@ pkgs = {'boost_chrono' : 'boost_system boost',
         'boost_math' : 'boost',
         'boost_mpi' : 'boost',
         'boost_program_options' : 'boost',
-        'boost_python' : 'boost python',
+        'boost_python%d%d'%(sys.version_info.major, sys.version_info.minor) : 'boost python',
         'boost_random' : 'boost',
         'boost_regex' : 'boost',
         'boost_serialization' : 'boost',
